@@ -13,7 +13,7 @@ func main() {
 	app.Action = func(c *cli.Context) error {
 		var cmd string
 		if c.NArg() > 0 {
-			cmd = c.Args()[0]
+			cmd = c.Args().Get(0)
 		}
 		fmt.Println("hello firend! cmd:", cmd)
 		return nil
