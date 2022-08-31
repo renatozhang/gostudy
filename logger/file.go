@@ -90,6 +90,6 @@ func (f *FileLogger) Fatal(format string, args ...interface{}) {
 }
 
 func (f *FileLogger) Close() {
-	defer f.file.Close()
-	defer f.warnFile.Close()
+	f.file.Close()
+	f.warnFile.Close()
 }
