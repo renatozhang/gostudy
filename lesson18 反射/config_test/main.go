@@ -34,4 +34,6 @@ func main() {
 		return
 	}
 	fmt.Printf("conf:%#v\n", conf)
+
+	iniconfig.MarshalFile(conf, "/tmp/config1.ini")
 }
