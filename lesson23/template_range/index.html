@@ -1,0 +1,19 @@
+<html> 
+    <head>
+    </head>
+    <body>
+        <div>
+            <ul>
+                {{range .}}
+                {{if gt .Age 18}}
+                <li style="background-color: blue;">
+                    <p>hello, old man, {{.Name}}</p>
+                </li>
+            {{else}}
+                <li><p>hello, young man, {{.Name}}</p></li>
+            {{end}}
+            {{end}}
+        </ul>s
+        </div>
+    </body>
+</html>

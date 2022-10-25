@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>login</title>
+    </head>
+    <body>
+        <div>
+            <!-- {{if gt .Age 18}}
+            <p>hello, old man, {{.Name}}</p>
+            {{else}}
+            <p>hello, young man, {{.Name}}</p>
+            {{end}} -->
+
+            <div>hello, {{.}}</div>
+            <div>name, {{.Name}}</div>
+            <div>sex, {{.Sex}}</div>
+            <div>age, {{.Age}}</div>
+            <div>address,{{with .Address}} <p>{{.City}}</p><p>{{.Province}}</p>{{end}}</div>
+        </div>
+    </body>
+</html>
