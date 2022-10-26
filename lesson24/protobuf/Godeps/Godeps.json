@@ -1,0 +1,132 @@
+{
+	"ImportPath": "github.com/renatozhang/gostudy/lesson24/protobuf",
+	"GoVersion": "go1.17",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "google.golang.org/protobuf/encoding/prototext",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/encoding/protowire",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/descfmt",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/descopts",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/detrand",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/encoding/defval",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/encoding/messageset",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/encoding/tag",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/encoding/text",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/errors",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/filedesc",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/filetype",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/flags",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/genid",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/impl",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/order",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/pragma",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/set",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/strs",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/internal/version",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/proto",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/reflect/protoreflect",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/reflect/protoregistry",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/runtime/protoiface",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		},
+		{
+			"ImportPath": "google.golang.org/protobuf/runtime/protoimpl",
+			"Comment": "v1.28.1-6-g7a48e2b",
+			"Rev": "7a48e2b66218ba306ed801e42126b374aefce255"
+		}
+	]
+}

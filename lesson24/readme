@@ -1,0 +1,10 @@
+# wget https://github.com/protocolbuffers/protobuf/releases/download/v21.8/protoc-21.8-linux-x86_64.zip
+# unzip protoc-21.8-linux-x86_64.zip  -d ./protoc
+# cd protoc/bin/
+# cp protoc /app/zhangzeng/goproject/bin/
+# go get -u github.com/golang/protobuf/protoc-gen-go@v1.3.2
+# protoc --go_out=./address/ ./person.proto
+
+
+# 三方包依赖
+# godep save 
