@@ -1,0 +1,9 @@
+# sql
+
+create database golang_db
+
+create table `user`( 
+    `id` bigint(20) not null auto_increment, 
+    `name` varchar(20) default '', 
+    `age` int(11) default 0, 
+    primary key (`id`) ) engine=InnoDB auto_increment=1 default charset=utf8mb4;

@@ -3,6 +3,7 @@ module github.com/renatozhang/gostudy
 go 1.17
 
 require (
+	github.com/go-sql-driver/mysql v1.6.0
 	github.com/urfave/cli v1.22.10
 	github.com/vmihailenco/msgpack/v5 v5.3.5
 	google.golang.org/protobuf v1.28.1

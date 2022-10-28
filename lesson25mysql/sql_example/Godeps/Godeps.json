@@ -1,0 +1,12 @@
+{
+	"ImportPath": "github.com/renatozhang/gostudy/lesson25mysql/sql_example",
+	"GoVersion": "go1.17",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.6.0-21-ga477f69",
+			"Rev": "a477f69f3c2abaf4646680bdc3a65d5172a6566e"
+		}
+	]
+}
