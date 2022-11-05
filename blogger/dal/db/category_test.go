@@ -36,3 +36,12 @@ func TestGetCategoryById(t *testing.T) {
 	t.Logf("get category succ, article:%#v\n", category)
 
 }
+
+func TestGetAllCategoryList(t *testing.T) {
+	categoryList, err := GetALLCategoryList()
+	if err != nil {
+		t.Errorf("get category list failed, err:%v\n", err)
+		return
+	}
+	t.Logf("category:%#v\n", categoryList)
+}

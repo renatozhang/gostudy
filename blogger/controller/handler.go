@@ -16,6 +16,7 @@ func IndexHandle(c *gin.Context) {
 		c.HTML(http.StatusInternalServerError, "views/500.html", nil)
 		return
 	}
+	fmt.Printf("articleList:%#v\n", articleRecordList)
 	c.HTML(http.StatusOK, "views/index.html", articleRecordList)
 }
 
@@ -71,6 +72,23 @@ func ArticleDetail(c *gin.Context) {
 		fmt.Printf("get relative article failed, err:%v\n", err)
 	}
 
-	c.HTML(http.StatusOK, "views/detail.html", articledetail)
+	prevArticle, nextArticle, err := logic.GetPrevAndNextArticleInfo(articleId)
+	if err != nil {
+		fmt.Printf("get pre pr next article failed, err:%v\n", err)
+	}
+
+	categoryList, err := logic.GetALLCategoryList()
+	if err != nil {
+		fmt.Printf("get category list failed,err:%v\n", err)
+	}
+
+	m := make(map[string]interface{})
+	m["detail"] = articledetail
+	m["relative_article"] = relativeArticle
+	m["prev"] = prevArticle
+	m["next"] = nextArticle
+	m["category"] = categoryList
+
+	c.HTML(http.StatusOK, "views/detail.html", m)
 
 }

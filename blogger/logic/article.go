@@ -92,3 +92,15 @@ func GetRelativeArticle(articleId int64) (articleList []*model.RelativeArticle, 
 	articleList, err = db.GetRelativeArticle(articleId)
 	return
 }
+
+func GetPrevAndNextArticleInfo(articleId int64) (prevArticle, nextArticle *model.RelativeArticle, err error) {
+	prevArticle, err = db.GetPrevArticleById(articleId)
+	if err != nil {
+		// 打印一个警告日志
+	}
+	nextArticle, err = db.GetNextArticleById(articleId)
+	if err != nil {
+		// 打印一个警告日志
+	}
+	return
+}

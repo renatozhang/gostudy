@@ -44,14 +44,14 @@ window.onload = function ()
   </div>
 </header>
 <article>
-  <h1 class="t_nav"><span>您现在的位置是：首页 > {{.Category.CategoryName}}</span>
+  <h1 class="t_nav"><span>您现在的位置是：首页 > {{.detail.CategoryName}}</span>
   </h1>
   <div class="infos">
     <div class="newsview">
-      <h3 class="news_title">{{.Title}}</h3>
+      <h3 class="news_title">{{.detail.Title}}</h3>
       <div class="news_author">
         <span class="au01">
-          <a href="mailto:dancesmiling@qq.com">{{.UserName}}</a>
+          <a href="mailto:dancesmiling@qq.com">{{.detail.UserName}}</a>
         </span><span class="au02">{{.CreateTime}}</span>
            <span class="au03">共<b>
              <script src="/view/add_count/?article_id={{.Id}}">
@@ -59,7 +59,7 @@ window.onload = function ()
              </div>
       
       
-      <div class="news_infos">{{.Content}}</div>
+      <div class="news_infos">{{.detail.Content}}</div>
     </div>
     <div class="share"> </div>
     <div class="nextinfo">
@@ -67,14 +67,14 @@ window.onload = function ()
         {{if eq .prev.ArticleId -1}}
         没有上一篇文章了
         {{else}}
-        <a href="/article/detail/?article_id=1">有些人，你永远不必等</a>
+        <a href="/article/detail/?article_id={{.prev.ArticleId}}">{{.prev.Title}}</a>
         {{end}}
       </p>
       <p>下一篇：
           {{if eq .next.ArticleId -1}}
           没有下一篇文章了
           {{else}}
-          <a href="/article/detail/?article_id=2">返回列表</a>
+          <a href="/article/detail/?article_id={{.next.ArticleId}}">{{.next.Title}}</a>
           {{end}}
       </p>
     </div>

@@ -67,3 +67,21 @@ func TestGetRelativeArticle(t *testing.T) {
 	}
 
 }
+
+func TestGetPrevArticleById(t *testing.T) {
+	articleInfo, err := GetPrevArticleById(6)
+	if err != nil {
+		t.Errorf("get prev article failed, err:%v\n", err)
+	}
+	t.Logf("article info:%#v", articleInfo)
+
+}
+
+func TestGetNextArticleById(t *testing.T) {
+	articleInfo, err := GetNextArticleById(6)
+	if err != nil {
+		t.Errorf("get prev article failed, err:%v\n", err)
+	}
+	t.Logf("article info:%#v", articleInfo)
+
+}
