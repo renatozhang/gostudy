@@ -45,7 +45,7 @@ window.onload = function ()
 </header>
 <article>
   <div class="blogs">
-    {{range .}} 
+    {{range .article_list}} 
     <li> 
       <h3 class="blogtitle"><a href="/">{{.Title}}</a></h3>
       <div class="bloginfo">
@@ -82,8 +82,8 @@ window.onload = function ()
     <div class="cloud">
       <h2 class="hometitle">分类云</h2>
       <ul>
-        {{range .}}
-        <a href="/category/?category_id={{.Category.CategoryId}}">{{.CategoryName}}</a> 
+        {{range .category_list}}
+        <a href="/category/?category_id={{.CategoryId}}">{{.CategoryName}}</a> 
         {{end}}
       </ul>
     </div>

@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 
 	"github.com/renatozhang/gostudy/blogger/model"
@@ -41,6 +42,29 @@ func GetArticleList(pageNum, pageSize int) (articleList []*model.ArticleInfo, er
 			order by create_time desc
 			limit ?,?`
 	err = DB.Select(&articleList, sqlstr, pageNum, pageSize)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func GetArticleListByCategoryId(categoryId, pageNum, pageSize int) (articleList []*model.ArticleInfo, err error) {
+	if pageNum < 0 || pageSize < 0 {
+		err = fmt.Errorf("invalid parameter, page_num:%d, page_size:%d", pageNum, pageSize)
+		return
+	}
+	sqlstr := `select
+				id,category_id,summary,title,view_count,
+				create_time,comment_count,username
+			from
+				article
+			where
+				category_id=?
+			and
+				status=1
+			order by create_time desc
+			limit ?,?`
+	err = DB.Select(&articleList, sqlstr, categoryId, pageNum, pageSize)
 	if err != nil {
 		return
 	}
@@ -102,4 +126,19 @@ func GetNextArticleById(articleId int64) (info *model.RelativeArticle, err error
 		return
 	}
 	return
+}
+
+func IsArticleExist(articleId int64) (exists bool, err error) {
+	var id int64
+	sqlstr := "select id from article where id=?"
+	err = DB.Get(&id, sqlstr, articleId)
+	if err == sql.ErrNoRows {
+		exists = false
+		return
+	}
+	if err != nil {
+		return
+	}
+	return
+
 }

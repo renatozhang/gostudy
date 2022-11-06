@@ -26,6 +26,13 @@ func main() {
 	router.POST("/article/submit/", controller.ArticleSubmit)
 	// 获取文章详情
 	router.GET("/article/detail/", controller.ArticleDetail)
+	// 文章评论相关的处理
+	router.POST("/comment/submit/", controller.CommentSubmit)
+	// 留言相关
+	router.GET("/leave/new/", controller.LeaveDetail)
+	router.POST("/leave/new/", controller.LeaveSubmit)
+	// 分类下面的文章列表
+	router.GET("/category/", controller.CategoryList)
 
 	router.Run()
 

@@ -7,5 +7,5 @@ type Leave struct {
 	Username   string    `db:"username"`
 	Content    string    `db:"content"`
 	Createtime time.Time `db:"create_time"`
-	Emai       string    `db:"email"`
+	Email      string    `db:"email"`
 }
