@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/DeanThompson/ginpprof"
 	"github.com/gin-gonic/gin"
 	"github.com/renatozhang/gostudy/blogger/controller"
 	"github.com/renatozhang/gostudy/blogger/dal/db"
@@ -15,6 +16,7 @@ func main() {
 		panic(err)
 	}
 
+	ginpprof.Wrapper(router)
 	router.Static("static", "./static")
 	router.LoadHTMLGlob("views/*")
 

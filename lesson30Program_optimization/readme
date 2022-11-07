@@ -1,0 +1,65 @@
+# go tool pprof ./cpu_pprof_exam ./cpu.pprof 
+File: cpu_pprof_exam
+Type: cpu
+Time: Nov 7, 2022 at 11:11am (CST)
+Duration: 30.16s, Total samples = 78.29s (259.55%)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof) top5
+Showing nodes accounting for 78.29s, 100% of 78.29s total
+      flat  flat%   sum%        cum   cum%
+    27.09s 34.60% 34.60%     61.18s 78.15%  runtime.selectnbrecv
+    25.88s 33.06% 67.66%     34.09s 43.54%  runtime.chanrecv
+    17.11s 21.85% 89.51%     78.29s   100%  main.logicCode
+     8.21s 10.49%   100%      8.21s 10.49%  runtime.empty (inline)
+
+(pprof) list runtime.selectnbrecv
+Total: 78.29s
+ROUTINE ======================== runtime.selectnbrecv in /usr/local/go/src/runtime/chan.go
+    27.09s     61.18s (flat, cum) 78.15% of Total
+         .          .    702://         ... foo
+         .          .    703:// } else {
+         .          .    704://         ... bar
+         .          .    705:// }
+         .          .    706://
+    10.83s     10.83s    707:func selectnbrecv(elem unsafe.Pointer, c *hchan) (selected, received bool) {
+    16.26s     50.35s    708:   return chanrecv(c, elem, false)
+         .          .    709:}
+         .          .    710:
+         .          .    711://go:linkname reflect_chansend reflect.chansend
+         .          .    712:func reflect_chansend(c *hchan, elem unsafe.Pointer, nb bool) (selected bool) {
+         .          .    713:   return chansend(c, elem, !nb, getcallerpc())
+
+
+#graphviz https://graphviz.org/download/
+# sudo apt install graphviz
+
+go tool pprof ./cpu_pprof_exam ./cpu.pprof 
+File: cpu_pprof_exam
+Type: cpu
+Time: Nov 7, 2022 at 11:11am (CST)
+Duration: 30.16s, Total samples = 78.29s (259.55%)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof) web
+
+
+# 性能测试CPU分析
+go test -c
+./cpu_pprof_exam.test -test.bench=BenchmarkLogic -test.cpuprofile=./cpu.pprof3
+go tool pprof ./cpu_pprof_exam.test ./cpu.pprof3
+
+
+# memory_pprof
+./mem_pprof_exam -memprofile=./mem.pprof
+
+# 火焰图
+go get github.com/uber/go-torch
+git clone https://github.com/brendangregg/FlameGraph.git
+把FlameGraph目录添加到操作系统的环境变量PATH
+windows环境需要安装需要修改go-torch/render/flamegraph.go的GenerateFlameGraph修改 并在go-touch目录下执行go install
+
+go-torch ./mem_pprof_exam ./mem.pprof 
+
+
+go get github.com/DeanThompson/ginpprof
+
+http://localhost:8080/debug/pprof
