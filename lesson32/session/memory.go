@@ -29,7 +29,7 @@ func (m *MemorySession) Get(key string) (value interface{}, err error) {
 	defer m.rwlock.RUnlock()
 	value, ok := m.data[key]
 	if !ok {
-		err = ErrKeyNotExist
+		err = ErrKeyNotExistInSession
 		return
 	}
 	return
