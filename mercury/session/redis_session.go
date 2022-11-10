@@ -82,7 +82,7 @@ func (r *RedisSession) Del(key string) (err error) {
 	defer r.rwlock.Unlock()
 	r.flag = SessionFlagModfiy
 	delete(r.data, key)
-	return
+	return nil
 }
 func (r *RedisSession) Save() (err error) {
 	r.rwlock.Lock()

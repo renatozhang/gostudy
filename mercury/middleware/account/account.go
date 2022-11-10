@@ -9,20 +9,20 @@ import (
 )
 
 // 处理请求函数
-func processRequest(ctx *gin.Context) {
+func ProcessRequest(ctx *gin.Context) {
 	var userSession session.Session
 	var err error
 	// 没有获取到用户session，新建一个session
 	defer func() {
 		if userSession == nil {
-			userSession, err = session.CreateSession()
+			userSession, _ = session.CreateSession()
 		}
 		ctx.Set(MercurySessionName, userSession)
 	}()
-	// 获取请求中的cookie session_id
+	// //从cookie中获取session_id
 	cookie, err := ctx.Request.Cookie(CookieSessionId)
 	if err != nil {
-		// 没有cookie 设置用户id与登录状态到gin框架中
+		//不存在的话，设置user_id=0, login_status为0。表示未登录状态
 		ctx.Set(MercuryUserId, int64(0))
 		ctx.Set(MercuryUserLoginStatus, int64(0))
 		return
@@ -62,7 +62,6 @@ func processRequest(ctx *gin.Context) {
 	// 设置用户id与登录状态到gin框架中
 	ctx.Set(MercuryUserId, int64(userId))
 	ctx.Set(MercuryUserLoginStatus, int64(1))
-	return
 }
 
 // 获取user_id （从gin框架的通用参数中取）
@@ -99,8 +98,25 @@ func IsLogin(ctx *gin.Context) (login bool) {
 	return
 }
 
+func SetUserId(userId int64, ctx *gin.Context) {
+	var userSession session.Session
+	tempSession, exists := ctx.Get(MercurySessionName)
+	if !exists {
+		return
+	}
+	userSession, ok := tempSession.(session.Session)
+	if !ok {
+		return
+	}
+	if userSession == nil {
+		return
+	}
+
+	userSession.Set(MercuryUserId, userId)
+}
+
 // 处理请求返回（种cookie）
-func processResponse(ctx *gin.Context) {
+func ProcessResponse(ctx *gin.Context) {
 	var userSession session.Session
 	// 获取用户session mercury_session
 	tempSession, exists := ctx.Get(MercurySessionName)
@@ -130,6 +146,4 @@ func processResponse(ctx *gin.Context) {
 	}
 	// 设置cookie返回到浏览器
 	http.SetCookie(ctx.Writer, cookie)
-
-	return
 }
