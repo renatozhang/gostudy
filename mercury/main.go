@@ -4,6 +4,8 @@ import (
 	"github.com/DeanThompson/ginpprof"
 	"github.com/gin-gonic/gin"
 	"github.com/renatozhang/gostudy/mercury/controller/account"
+	"github.com/renatozhang/gostudy/mercury/controller/ask"
+	"github.com/renatozhang/gostudy/mercury/controller/category"
 	"github.com/renatozhang/gostudy/mercury/dal/db"
 	"github.com/renatozhang/gostudy/mercury/id_gen"
 	"github.com/renatozhang/gostudy/mercury/session"
@@ -56,8 +58,10 @@ func main() {
 	ginpprof.Wrapper(router)
 	initTemplate(router)
 
-	router.POST("/api/user/register/", account.RegisterHandle)
-	router.POST("/api/user/login/", account.LoginHandle)
+	router.POST("/api/user/register", account.RegisterHandle)
+	router.POST("/api/user/login", account.LoginHandle)
+	router.GET("/api/category/list", category.GetCategoryListHandle)
+	router.GET("/api/ask/submit", ask.QuestionSubmitHandle)
 
 	router.Run(":9090")
 
