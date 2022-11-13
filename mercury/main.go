@@ -7,7 +7,10 @@ import (
 	"github.com/renatozhang/gostudy/mercury/controller/ask"
 	"github.com/renatozhang/gostudy/mercury/controller/category"
 	"github.com/renatozhang/gostudy/mercury/dal/db"
+	"github.com/renatozhang/gostudy/mercury/filter"
 	"github.com/renatozhang/gostudy/mercury/id_gen"
+	"github.com/renatozhang/gostudy/mercury/logger"
+	maccount "github.com/renatozhang/gostudy/mercury/middleware/account"
 	"github.com/renatozhang/gostudy/mercury/session"
 )
 
@@ -37,10 +40,29 @@ func initSession() (err error) {
 	return
 }
 
+func initFilter() (err error) {
+	err = filter.Init("./data/filter.dat.txt")
+	if err != nil {
+		logger.Debug("init filter failed,err:%v", err)
+		return
+	}
+	logger.Debug("init filter succ")
+	return
+}
+
 func main() {
 	router := gin.Default()
 
+	config := make(map[string]string)
+	config["log_lervel"] = "debug"
+	logger.InitLogger("console", config)
+
 	err := initDb()
+	if err != nil {
+		panic(err)
+	}
+
+	err = initFilter()
 	if err != nil {
 		panic(err)
 	}
@@ -61,7 +83,7 @@ func main() {
 	router.POST("/api/user/register", account.RegisterHandle)
 	router.POST("/api/user/login", account.LoginHandle)
 	router.GET("/api/category/list", category.GetCategoryListHandle)
-	router.GET("/api/ask/submit", ask.QuestionSubmitHandle)
+	router.POST("/api/ask/submit", maccount.AuthMiddleware, ask.QuestionSubmitHandle)
 
 	router.Run(":9090")
 
