@@ -3,7 +3,10 @@ package logger
 import "testing"
 
 func TestFileLogger(t *testing.T) {
-	logger := NewFileLogger(LogLevelDebug, "/home/zhangzeng/log", "test")
+	logger, err := NewFileLogger(LogLevelDebug, "/home/zhangzeng/log", "test")
+	if err != nil {
+		return
+	}
 	logger.Debug("user id[%d] is conme from china", 324234)
 	logger.Trace("test Trace log")
 	logger.Info("test Info log")
@@ -13,7 +16,10 @@ func TestFileLogger(t *testing.T) {
 }
 
 func TestConsoleLogger(t *testing.T) {
-	logger := NewConsoleLogger(LogLevelDebug)
+	logger, err := NewConsoleLogger(LogLevelDebug)
+	if err != nil {
+		return
+	}
 	logger.Debug("user id[%d] is conme from china", 324234)
 	logger.Trace("test Trace log")
 	logger.Info("test Info log")
