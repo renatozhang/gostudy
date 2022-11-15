@@ -53,16 +53,15 @@ func Login(user *common.UserInfo) (err error) {
 }
 
 func GetUserInfoList(userIdList []int64) (userInfoList []*common.UserInfo, err error) {
+	if len(userIdList) == 0 {
+		return
+	}
 	sqlstr := `select
 			   			user_id,nickname,sex,username,email
 			   		from
 						user
 			   		where user_id in(?)`
-	var userIdTmpArr []interface{}
-	for _, userId := range userIdList {
-		userIdTmpArr = append(userIdTmpArr, userId)
-	}
-	query, args, err := sqlx.In(sqlstr, userIdTmpArr...)
+	query, args, err := sqlx.In(sqlstr, userIdList)
 	if err != nil {
 		logger.Error("sqlx in failed, sqlstr:%v, user_ids:%#v, err:%v", sqlstr, userIdList, err)
 		return
