@@ -156,3 +156,31 @@ INSERT INTO `user` VALUES ('25', '225186212074225665', 'DKDK', '', '9c0ac25434be
 INSERT INTO `user` VALUES ('26', '225190952694710273', 'admin222222222', '', '21968b082e3af16563cad001184ddfa8', 'admin', '0', '2018-12-02 20:31:07', '2018-12-02 20:31:07');
 INSERT INTO `user` VALUES ('27', '225191497299918849', 'sherlockhua', '拈花湾', 'e46445d7555d22b48bea1997cd607420', 'sherlockhua@163.com', '1', '2018-12-02 20:36:32', '2018-12-02 20:36:32');
 INSERT INTO `user` VALUES ('28', '225191580145811457', 'kala', 'kalo', '76bac7d7ee3687f8c583769d410a2c0f', 'kala@qq.com', '2', '2018-12-02 20:37:21', '2018-12-02 20:37:21');
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`comment_id` BIGINT(20) NOT NULL COMMENT '评论id',
+	`content` LONGTEXT CHARACTER SET utf8mb4 NOT NULL COMMENT '内容',
+	`author_id` BIGINT(20) NOT NULL COMMENT '作者',
+	·like_count· INT(10) UNSIGNED NOT NULL	DEFAULT '0' COMMENT '点赞数',
+	·comment_count· INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '评论数',
+	`create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `idx_comment_id` (`comment_id`),
+	KEY `id_author_id` (`author_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+DROP TABLE IF EXISTS `comment_rel`;
+CREATE TABLE `comment_rel` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`comment_id` BIGINT(20) NOT NULL COMMENT '评论id',
+	`parent_id` BIGINT(20) NOT NULL COMMENT '父id',
+	`level` int(11) NOT NULL COMMENT '层次，1：第一层，2：第二层',
+	`question_id` BIGINT(20) NOT NULL	DEFAULT '0' COMMENT '问题id，用来表示评论属于哪个问题',
+	`reply_author_id` BIGINT(20) NOT NULL COMMENT '回复评论的作者id',
+	PRIMARY KEY (`id`),
+	KEY `idx_question_id` (`question_id`,`level`),
+	KEY `id_parent_id` (`parent_id`,`level`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
