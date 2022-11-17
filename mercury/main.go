@@ -99,9 +99,9 @@ func main() {
 		// 发表回复接口
 		commentGroup.POST("/post_reply", comment.PostReplyHandle)
 		//获取评论列表接口
-		// commentGroup.GET("/list", comment.PostCommentHandle)
+		commentGroup.GET("/list", comment.CommentListHandle)
 		// 获取回复列表接口
-		// commentGroup.GET("/post_comment", comment.PostCommentHandle)
+		commentGroup.GET("/reply_list", comment.ReplyListHandle)
 		//点赞接口，
 		// commentGroup.POST ("/like", comment.PostCommentHandle)
 	}
