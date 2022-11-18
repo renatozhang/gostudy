@@ -185,3 +185,29 @@ CREATE TABLE `comment_rel` (
 	KEY `idx_question_id` (`question_id`,`level`),
 	KEY `id_parent_id` (`parent_id`,`level`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+DROP TABLE IF EXISTS `favorite_dir`;
+CREATE TABLE `favorite_dir` (
+	`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`dir_id` BIGINT(20) NOT NULL COMMENT '收藏夹id',
+  `dir_name` varchar(64) COLLATE utf8mb4_general_ci NOT NULL COMMENT '收藏夹名称',
+	`user_id` BIGINT(20) UNSIGNED NOT NULL COMMENT '用户id',
+	`count` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '个数',
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `idx_user_dir_name` (`user_id`,`dir_name`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+DROP TABLE IF EXISTS `favorite`;
+CREATE TABLE `favorite` (
+	`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`answer_id` BIGINT(20) NOT NULL COMMENT '问题id',
+	`user_id` BIGINT(20) UNSIGNED NOT NULL COMMENT '用户id',
+	`dir_id` BIGINT(20) NOT NULL COMMENT '收藏夹id',
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `idx_user_Id_answer_id` (`user_id`,`dir_id`,`answer_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+

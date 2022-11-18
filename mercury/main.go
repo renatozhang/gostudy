@@ -7,6 +7,7 @@ import (
 	"github.com/renatozhang/gostudy/mercury/controller/answer"
 	"github.com/renatozhang/gostudy/mercury/controller/category"
 	"github.com/renatozhang/gostudy/mercury/controller/comment"
+	"github.com/renatozhang/gostudy/mercury/controller/favorite"
 	"github.com/renatozhang/gostudy/mercury/controller/question"
 	"github.com/renatozhang/gostudy/mercury/dal/db"
 	"github.com/renatozhang/gostudy/mercury/filter"
@@ -105,6 +106,14 @@ func main() {
 		//点赞接口，
 		commentGroup.POST("/like", comment.LikeHandle)
 	}
-	router.Run(":9090")
+	// 收藏夹相关
+	favoriteGroup := router.Group("/api/favorite/", maccount.AuthMiddleware)
+	{
+		favoriteGroup.POST("/add_dir", favorite.AddDirHandle)
+		favoriteGroup.POST("/add", favorite.AddFavoriteHandle)
+		favoriteGroup.GET("/dir_list", favorite.DirListHandle)
+		favoriteGroup.GET("/list", favorite.FavoriteListHandle)
+	}
+	router.Run(":8089")
 
 }
