@@ -103,7 +103,7 @@ func main() {
 		// 获取回复列表接口
 		commentGroup.GET("/reply_list", comment.ReplyListHandle)
 		//点赞接口，
-		// commentGroup.POST ("/like", comment.PostCommentHandle)
+		commentGroup.POST("/like", comment.LikeHandle)
 	}
 	router.Run(":9090")
 

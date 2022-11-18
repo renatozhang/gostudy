@@ -268,3 +268,31 @@ func ReplyListHandle(ctx *gin.Context) {
 	apiCommentList.Count = count
 	util.ResponseSuccess(ctx, apiCommentList)
 }
+
+func LikeHandle(ctx *gin.Context) {
+	var like common.Like
+	err := ctx.BindJSON(&like)
+	if err != nil {
+		util.ResponseError(ctx, util.ErrCodeParmeter)
+		logger.Error("like handler failed, err:%v", err)
+		return
+	}
+	if like.Id == 0 || (like.LikeType != common.LikeTypeAnswer && like.LikeType != common.LikeTypeComment) {
+		util.ResponseError(ctx, util.ErrCodeParmeter)
+		logger.Error("invalid like paramter, data:%#v", like)
+		return
+	}
+
+	if like.LikeType == common.LikeTypeAnswer {
+		err = db.UpdateAnswerLikeCount(like.Id)
+	} else {
+		err = db.UpdateCommentLikeCount(like.Id)
+	}
+
+	if err != nil {
+		util.ResponseError(ctx, util.ErrCodeServerBusy)
+		logger.Error("update like count failed, err:%v", err)
+		return
+	}
+	util.ResponseSuccess(ctx, nil)
+}

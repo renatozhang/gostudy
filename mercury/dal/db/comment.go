@@ -87,6 +87,12 @@ func CreatePostComment(comment *common.Comment) (err error) {
 		logger.Error("insert comment_rel failed, comment:%#v, err:%v", comment, err)
 		return
 	}
+	sqlstr = "update answer set comment_count=comment_count+1 where answer_id=?"
+	_, err = tx.Exec(sqlstr, comment.QuestionId)
+	if err != nil {
+		logger.Error("update answer failed, comment:%#v, err:%v", comment, err)
+		return
+	}
 	err = tx.Commit()
 	return
 }
@@ -166,5 +172,19 @@ func GetReplyList(commentId int64, offset, limit int64) (commentList []*common.C
 		return
 	}
 
+	return
+}
+
+func UpdateCommentLikeCount(commentId int64) (err error) {
+	sqlstr := `update
+					comment
+				set
+				like_count=like_count+1
+				where comment_id=?`
+	_, err = DB.Exec(sqlstr, commentId)
+	if err != nil {
+		logger.Error("UpdateCommentLikeCount failed, err:%v", err)
+		return
+	}
 	return
 }

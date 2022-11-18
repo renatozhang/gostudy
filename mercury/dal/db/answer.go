@@ -61,3 +61,17 @@ func GetAnswerCount(questionId int64) (answerCount int32, err error) {
 	}
 	return
 }
+
+func UpdateAnswerLikeCount(answerId int64) (err error) {
+	sqlstr := `update
+					answer
+				set
+				voteup_count=voteup_count+1
+				where answer_id=?`
+	_, err = DB.Exec(sqlstr, answerId)
+	if err != nil {
+		logger.Error("UpdateAnswerCommentCount failed, err:%v", err)
+		return
+	}
+	return
+}
