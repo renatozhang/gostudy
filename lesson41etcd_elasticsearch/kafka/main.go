@@ -22,6 +22,7 @@ func main() {
 		return
 	}
 	defer client.Close()
+	// 发送消息
 	pid, offset, err := client.SendMessage(msg)
 	if err != nil {
 		fmt.Println("send message failed,", err)

@@ -1,3 +1,16 @@
+# mysql 
+docker run --name mysql -v /data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3336:3306 -d mysql:5.7
+[mysqld]
+character-set-server=utf8
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
+# redis
+docker run  -p 6379:6379 --name redis6379 -v /data/redis6379/data:/data -v /data/redis6379/redis.conf:/etc/redis/redis.conf --restart=always -d redis:5.0 redis-server /etc/redis/redis.conf
+
+# nsq
+http://t.zoukankan.com/Hollson-p-9160718.html
 # etcd
 
 wget https://github.com/etcd-io/etcd/releases/download/v3.4.22/etcd-v3.4.22-linux-amd64.tar.gz

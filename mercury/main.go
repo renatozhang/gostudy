@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/DeanThompson/ginpprof"
+	"github.com/Shopify/sarama"
 	"github.com/gin-gonic/gin"
 	"github.com/renatozhang/gostudy/mercury/controller/account"
 	"github.com/renatozhang/gostudy/mercury/controller/answer"
@@ -15,6 +16,7 @@ import (
 	"github.com/renatozhang/gostudy/mercury/logger"
 	maccount "github.com/renatozhang/gostudy/mercury/middleware/account"
 	"github.com/renatozhang/gostudy/mercury/session"
+	"github.com/renatozhang/gostudy/mercury/util"
 )
 
 func initTemplate(router *gin.Engine) {
@@ -80,6 +82,19 @@ func main() {
 		panic(err)
 	}
 
+	err = util.InitKafka("localhost:9092")
+	if err != nil {
+		panic(err)
+	}
+
+	err = util.InitKafkaConsumer("localhost:9092", "mercury_question",
+		func(message *sarama.ConsumerMessage) {
+			logger.Debug("receive from kafka, msg:%#v", message.Value)
+		})
+	if err != nil {
+		panic(err)
+	}
+
 	ginpprof.Wrapper(router)
 	initTemplate(router)
 
@@ -114,6 +129,6 @@ func main() {
 		favoriteGroup.GET("/dir_list", favorite.DirListHandle)
 		favoriteGroup.GET("/list", favorite.FavoriteListHandle)
 	}
-	router.Run(":8089")
+	router.Run(":9090")
 
 }
